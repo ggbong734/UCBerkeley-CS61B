@@ -9,7 +9,7 @@ public class Body{
 	public String imgFileName;
 
 	/*Gravitational constant in N*m^2/kg^2 */
-	public static final double gConst = 6.67e-11;
+	private static final double gConst = 6.67e-11;
 
 	public Body(double xP, double yP, double xV, 
 				  double yV, double m, String img){
