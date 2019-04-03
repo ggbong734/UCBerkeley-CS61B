@@ -50,6 +50,8 @@ public class StdDrawDemo {
 
 		int waitTimeMilliseconds = 100;
 
+		StdDraw.setScale(-100, 100);
+		
 		/* Stamp 100 additional pictures in random locations,
 		 * each one coming slightly faster than the one before. */
 		int count = 0;
@@ -86,6 +88,8 @@ public class StdDrawDemo {
 		  * in the standard drawing window. */
 		StdDraw.enableDoubleBuffering();
 
+		StdDraw.setScale(-100, 100);
+
 		double size = 100;
 		while (size < 500) {
 			StdDraw.clear();
@@ -107,8 +111,8 @@ public class StdDrawDemo {
 	public static void main(String[] args) {
 		/** Try commenting out some of these calls and
 		* notice the differences. */
-		drawThree();
-		//drawRandom();
+		//drawThree();
+		drawRandom();
 		//drawZoom();
 	}
 }
