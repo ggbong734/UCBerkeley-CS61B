@@ -29,10 +29,12 @@ public class ArrayDeque<Item> {
     /* Resize an array to desired capacity */
     private void resize(int capacity){
         Item[] a = (Item[]) new Object[capacity];
-        System.arraycopy(items, 0, a, 0, size);
+        System.arraycopy(items, plusOne(nextFirst), a, capacity - (size - plusOne(nextFirst)),
+                size - plusOne(nextFirst));
+        System.arraycopy(items, 0, a, 0, nextLast);
         items = a;
-        nextFirst = 0;
-        nextLast = size + 1;
+        nextFirst = capacity - (size - nextFirst);
+        // nextLast stays at the same position;
     }
 
     /* Adds an item to the end of the array */

@@ -21,19 +21,14 @@ public class ArrayDequeTest {
     @Test
     public void testRemove() {
         ArrayDeque<Integer> ad2 = new ArrayDeque<>();
-        assertTrue(ad2.isEmpty());
-        ad2.addFirst(0);
-        ad2.addFirst(7);
-        ad2.addFirst(6);
-        ad2.addLast(1);
-        ad2.addLast(2);
-        ad2.addFirst(5);
-        ad2.removeFirst();
-        ad2.removeLast();
-        ad2.removeFirst();
-        Integer[] exp2 = new Integer[]{0, 1, null, null, null, null, null, 7};
+        for(int i = 0; i < 8; i++) {
+            ad2.addLast(i);
+        }
+        Integer[] exp2 = new Integer[]{7, 0, 1, 2, 3, 4, 5, 6};
         assertArrayEquals(exp2, ad2.items);
-        assertEquals(3, ad2.size);
+        assertEquals(8, ad2.size);
+        int seven = ad2.get(7);
+        assertEquals(7, seven);
     }
 
     //Test ArrayDeque copier constructor
