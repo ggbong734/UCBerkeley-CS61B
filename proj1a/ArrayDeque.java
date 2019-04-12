@@ -77,16 +77,6 @@ public class ArrayDeque<Item> {
         return items[position];
     }
 
-    /* Gets the item from the end of the array */
-    public Item getLast() {
-        return get(size - 1);
-    }
-
-    /* Gets the first item from the array */
-    public Item getFirst() {
-        return get(0);
-    }
-
     /* Computes the usage factor of an array */
     private double usageFactor() {
         return size/items.length;
@@ -98,7 +88,7 @@ public class ArrayDeque<Item> {
         if(size == 0) {
             return null;
         }
-        Item returnItem = getFirst();
+        Item returnItem = get(plusOne(nextFirst));
         nextFirst = plusOne(nextFirst);
         items[nextFirst] = null;
         size -= 1;
@@ -115,7 +105,7 @@ public class ArrayDeque<Item> {
         if(size == 0) {
             return null;
         }
-        Item returnItem = getLast();
+        Item returnItem = get(minusOne(nextLast));
         nextLast = minusOne(nextLast);
         items[nextLast] = null;
         size -= 1;
