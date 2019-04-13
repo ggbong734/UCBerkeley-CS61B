@@ -5,11 +5,11 @@
 public class LinkedListDeque<T> {
 
     private class ListNode<T> {
-        public ListNode prev;
-        public T item;
-        public ListNode next;
+        private ListNode prev;
+        private T item;
+        private ListNode next;
 
-        public ListNode(ListNode p, T i, ListNode n) {
+        ListNode(ListNode p, T i, ListNode n) {
             prev = p;
             item = i;
             next = n;
@@ -74,7 +74,7 @@ public class LinkedListDeque<T> {
     /* Removes and returns the first item at the front of the deque.
        If not such item exists, return null */
     public T removeFirst() {
-        if (sentinel.next == sentinel){
+        if (sentinel.next == sentinel) {
             return null;
         }
         size -= 1;
@@ -120,7 +120,7 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
         size = 0;
-        for(int i = 0; i < other.size(); i += 1) {
+        for (int i = 0; i < other.size(); i += 1) {
             addLast((T) other.get(i));
         }
     }

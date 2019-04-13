@@ -5,17 +5,19 @@ public class ArrayDequeTest {
     //Test addFirst, addLast, isEmpty, size functions
     @Test
     public void testAdd() {
-        ArrayDeque<String> ad1 = new ArrayDeque<>();
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
         assertTrue(ad1.isEmpty());
-        ad1.addFirst("b");
-        ad1.addLast("a");
-        ad1.addLast("t");
-        String[] exp = new String[]{"b", "a", "t", null, null, null, null, null};
+        ad1.addFirst(0);
+        ad1.addFirst(1);
+        ad1.addFirst(2);
+        ad1.addFirst(4);
+        ad1.addFirst(6);
+        int rem = ad1.removeFirst();
+        Integer[] exp = new Integer[]{0, null, null, null, null, 4, 2, 1};
         assertArrayEquals(exp, ad1.items);
-        assertEquals(3, ad1.size);
-
-        assertEquals("t", ad1.get(2));
-        assertEquals("b", ad1.get(0));
+        assertEquals(6, rem);
+        assertEquals(4, ad1.size);
+        assertFalse(ad1.isEmpty());
     }
     // Test removeFirst and removeLast functions, test if resize is correct!
     @Test
