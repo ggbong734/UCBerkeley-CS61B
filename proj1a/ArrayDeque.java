@@ -31,8 +31,8 @@ public class ArrayDeque<T> {
         T[] a = (T[]) new Object[capacity];
         // expanding array (nextFirst < nextLast) or when shrinking array (nextFirst > nextLast)
         // nextLast stays at the same position
-        if (((capacity > items.length) && (nextFirst < nextLast)) ||
-                ((capacity < items.length) && (nextFirst > nextLast))) {
+        if (((capacity > items.length) && (nextFirst < nextLast))
+                || ((capacity < items.length) && (nextFirst > nextLast))) {
             System.arraycopy(items, plusOne(nextFirst),
                              a, capacity - (items.length - plusOne(nextFirst)),
                        items.length - plusOne(nextFirst));
@@ -41,7 +41,7 @@ public class ArrayDeque<T> {
             items = a;
 
 
-        } else if ((capacity > items.length) && (nextFirst > nextLast)){
+        } else if ((capacity > items.length) && (nextFirst > nextLast)) {
             // expanding array (nextFirst > nextLast)
             // nextFirst and nextLast stay at the same position
             System.arraycopy(items, plusOne(nextFirst),
