@@ -88,13 +88,13 @@ public class ArrayDeque<T> {
         return items[position];
     }
     // Get the first item in the array
-    public T getFirst() {
+    private T getFirst() {
         return get(0);
     }
 
     // Get the last item in the array
-    public T getLast() {
-        return get(size);
+    private T getLast() {
+        return get(size - 1);
     }
 
     /* Computes the usage factor of an array */
@@ -145,5 +145,13 @@ public class ArrayDeque<T> {
         for (int i = 0; i < other.size; i++) {
             addLast((T) other.get(i));
         }
+    }
+
+    /* Prints the items in the array deque from first to last, separated by space */
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println();
     }
 }
