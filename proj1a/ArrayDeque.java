@@ -29,12 +29,24 @@ public class ArrayDeque<Item> {
     /* Resize an array to desired capacity */
     private void resize(int capacity){
         Item[] a = (Item[]) new Object[capacity];
-        System.arraycopy(items, plusOne(nextFirst), a, capacity - (size - plusOne(nextFirst)),
-                size - plusOne(nextFirst));
-        System.arraycopy(items, 0, a, 0, nextLast);
-        items = a;
-        nextFirst = capacity - (size - nextFirst);
-        // nextLast stays at the same position;
+        // expanding array or when shrinking array and nextFirst > nextLast
+        if ((capacity > items.length) || ((capacity < items.length) && (nextFirst > nextLast))) {
+            System.arraycopy(items, plusOne(nextFirst),
+                             a,capacity - (items.length - plusOne(nextFirst)),
+                       items.length - plusOne(nextFirst));
+            System.arraycopy(items, 0, a, 0, nextLast);
+            nextFirst = capacity - (items.length - nextFirst);
+            items = a;
+            // nextLast stays at the same position;
+        }
+        //shrinking array when nextLast > nextFirst
+        else {
+            int overIndex = ((nextLast / capacity) * capacity);
+            System.arraycopy(items, overIndex, a, 0, nextLast - overIndex);
+            nextFirst = nextFirst - overIndex;
+            nextLast = nextLast - overIndex;
+            items = a;
+        }
     }
 
     /* Adds an item to the end of the array */
@@ -79,7 +91,7 @@ public class ArrayDeque<Item> {
 
     /* Computes the usage factor of an array */
     private double usageFactor() {
-        return size/items.length;
+        return 1.0*size/items.length;
     }
 
     /* Removes and returns the item at the front of the deque.
@@ -93,7 +105,7 @@ public class ArrayDeque<Item> {
         items[nextFirst] = null;
         size -= 1;
 
-        if(items.length >= 16 && usageFactor() < 0.25) {
+        if((items.length >= 16) && (usageFactor() < 0.25)) {
             resize(items.length / 2);
         }
         return returnItem;
@@ -110,7 +122,7 @@ public class ArrayDeque<Item> {
         items[nextLast] = null;
         size -= 1;
 
-        if(items.length >= 16 && usageFactor() < 0.25) {
+        if((items.length >= 16) && (usageFactor() < 0.25)) {
             resize(items.length / 2);
         }
         return returnItem;

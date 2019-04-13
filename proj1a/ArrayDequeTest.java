@@ -17,32 +17,38 @@ public class ArrayDequeTest {
         assertEquals("t", ad1.get(2));
         assertEquals("b", ad1.get(0));
     }
-    // Test removeFirst and removeLast functions
+    // Test removeFirst and removeLast functions, test if resize is correct!
     @Test
     public void testRemove() {
         ArrayDeque<Integer> ad2 = new ArrayDeque<>();
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 12; i++) {
             ad2.addLast(i);
         }
-        Integer[] exp2 = new Integer[]{7, 0, 1, 2, 3, 4, 5, 6};
+        ad2.removeFirst();
+        ad2.removeLast();
+        Integer[] exp2 = new Integer[]{7, 8, 9, 10, null, null, null, null, null, null, 1, 2, 3, 4, 5, 6};
         assertArrayEquals(exp2, ad2.items);
-        assertEquals(8, ad2.size);
-        int seven = ad2.get(7);
-        assertEquals(7, seven);
+        int one = ad2.get(0);
+        assertEquals(1, one);
+        for(int i = 0; i < 7; i++) {
+            ad2.removeLast();
+        }
+        Integer[] exp3 = new Integer[]{null, null, 1, 2, 3, null, null, null};
+        assertArrayEquals(exp3, ad2.items);
     }
 
     //Test ArrayDeque copier constructor
     @Test
     public void testConstructor() {
-        ArrayDeque<Integer> ad3 = new ArrayDeque<>();
-        ad3.addFirst(0);
-        ad3.addLast(1);
-        ad3.addLast(2);
-        ad3.addLast(3);
-        ad3.addLast(4);
-        Integer[] exp3 = new Integer[]{0, 1, 2, 3, 4, null, null, null};
-        ArrayDeque<Integer> adCopy = new ArrayDeque<>(ad3);
-        assertArrayEquals(exp3, adCopy.items);
+        ArrayDeque<Integer> ad4 = new ArrayDeque<>();
+        ad4.addFirst(0);
+        ad4.addLast(1);
+        ad4.addLast(2);
+        ad4.addLast(3);
+        ad4.addLast(4);
+        Integer[] exp4 = new Integer[]{0, 1, 2, 3, 4, null, null, null};
+        ArrayDeque<Integer> adCopy = new ArrayDeque<>(ad4);
+        assertArrayEquals(exp4, adCopy.items);
     }
         //Then get ArrayDeque constructor to work
 
