@@ -29,17 +29,29 @@ public class ArrayDeque<T> {
     /* Resize an array to desired capacity */
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        // expanding array or when shrinking array and nextFirst > nextLast
-        if ((capacity > items.length) || ((capacity < items.length) && (nextFirst > nextLast))) {
+        // expanding array (nextFirst < nextLast) or when shrinking array (nextFirst > nextLast)
+        // nextLast stays at the same position
+        if (((capacity > items.length) && (nextFirst < nextLast)) ||
+                ((capacity < items.length) && (nextFirst > nextLast))) {
             System.arraycopy(items, plusOne(nextFirst),
                              a, capacity - (items.length - plusOne(nextFirst)),
                        items.length - plusOne(nextFirst));
             System.arraycopy(items, 0, a, 0, nextLast);
             nextFirst = capacity - (items.length - nextFirst);
             items = a;
-            // nextLast stays at the same position;
+
+
+        } else if ((capacity > items.length) && (nextFirst > nextLast)){
+            // expanding array (nextFirst > nextLast)
+            // nextFirst and nextLast stay at the same position
+            System.arraycopy(items, plusOne(nextFirst),
+                    a, capacity - (items.length - plusOne(nextFirst)),
+                    items.length - plusOne(nextFirst));
+            items = a;
+
         } else {
-            //shrinking array when nextLast > nextFirst
+            //shrinking array (nextLast > nextFirst)
+            //nextFirst and nextLast are changed
             int overIndex = ((nextLast / capacity) * capacity);
             System.arraycopy(items, overIndex, a, 0, nextLast - overIndex);
             nextFirst = nextFirst - overIndex;
@@ -47,6 +59,7 @@ public class ArrayDeque<T> {
             items = a;
         }
     }
+
 
     /* Adds an item to the end of the array */
     public void addLast(T x) {
