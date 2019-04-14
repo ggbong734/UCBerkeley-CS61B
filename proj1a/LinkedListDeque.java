@@ -1,8 +1,9 @@
 /** This file constructs a data structure class for doubly linked list with circular sentinel node.
  *  This is project 1a of UC Berkeley CS 61B Spring 2019 taught by Josh Hug.
  * @param <T>
+ * @author Gerry Bong  
  */
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
 
     private class ListNode<T> {
         private ListNode prev;
@@ -35,6 +36,7 @@ public class LinkedListDeque<T> {
     }*/
 
     /* Add item to the front of the list */
+    @Override
     public void addFirst(T item) {
         ListNode<T> p = sentinel.next;
         sentinel.next = new ListNode<T>(sentinel, item, sentinel.next);
@@ -44,6 +46,7 @@ public class LinkedListDeque<T> {
     }
 
     /*Add item to the end of the list */
+    @Override
     public void addLast(T item) {
         ListNode<T> p = sentinel.prev;
         sentinel.prev = new ListNode<T>(sentinel.prev, item, sentinel);
@@ -57,11 +60,13 @@ public class LinkedListDeque<T> {
     }
 
     /* Return the number of items in the Deque */
+    @Override
     public int size() {
         return size;
     }
 
     /* Prints the items in the deque from first to last, separated by space */
+    @Override
     public void printDeque() {
         ListNode<Integer> p = sentinel;
         while (p.next != sentinel) {
@@ -73,6 +78,7 @@ public class LinkedListDeque<T> {
 
     /* Removes and returns the first item at the front of the deque.
        If not such item exists, return null */
+    @Override
     public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
@@ -86,6 +92,7 @@ public class LinkedListDeque<T> {
 
     /* Removes and returns the last item at the back of the deque.
        If not such item exists, return null */
+    @Override
     public T removeLast() {
         if (sentinel.prev == sentinel) {
             return null;
@@ -99,6 +106,7 @@ public class LinkedListDeque<T> {
 
     /* Gets the item at the given index, where 0 is the front,
     1 is the next item, and so forth. If no such item exists, returns null.*/
+    @Override
     public T get(int index) {
         if ((index < 0) || (index > size - 1)) {
             return null;

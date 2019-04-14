@@ -3,8 +3,6 @@
  * @author Gerry Bong
  */
 
-import java.lang.*;
-
 public class OffByOne implements CharacterComparator {
 
     /* Returns true if the two characters are off by one */

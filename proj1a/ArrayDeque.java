@@ -1,8 +1,9 @@
 /** This file constructs the Array Deque List class.
  * This is part of project 1A of UC Berkeley CS 61B by Josh Hug.
  * @param <T>
+ * @author Gerry Bong   
  */
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T>{
     private T[] items;
     private int size;
     private int nextFirst;
@@ -62,21 +63,23 @@ public class ArrayDeque<T> {
 
 
     /* Adds an item to the end of the array */
-    public void addLast(T x) {
+    @Override
+    public void addLast(T item) {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[nextLast] = x;
+        items[nextLast] = item;
         size += 1;
         nextLast = plusOne(nextLast);
     }
 
     /* Adds an item to the front of the array */
-    public void addFirst(T x) {
+    @Override
+    public void addFirst(T item) {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[nextFirst] = x;
+        items[nextFirst] = item;
         size += 1;
         nextFirst = minusOne(nextFirst);
     }
@@ -87,12 +90,14 @@ public class ArrayDeque<T> {
     }
 
     /* Returns the number of items in the deque */
+    @Override
     public int size() {
         return size;
     }
 
     /* Gets the item at the given index, where 0 is the front,
     1 is the next item, and so forth. If no such item exists, returns null.*/
+    @Override
     public T get(int index) {
         if ((index < 0) || (index > size - 1)) {
             return null;
@@ -117,6 +122,7 @@ public class ArrayDeque<T> {
 
     /* Removes and returns the item at the front of the deque.
        If no such item exists, returns null*/
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -134,6 +140,7 @@ public class ArrayDeque<T> {
 
     /* Removes and returns the item at the back of the deque.
        If no such item exists, returns null*/
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -161,6 +168,7 @@ public class ArrayDeque<T> {
     }
 
     /* Prints the items in the array deque from first to last, separated by space */
+    @Override
     public void printDeque() {
         for (int i = 0; i < size; i++) {
             System.out.print(get(i) + " ");
