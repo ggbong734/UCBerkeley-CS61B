@@ -9,7 +9,7 @@ public class Palindrome {
 /* Given a string, this method returns a Deque
  * where the characters appear in the same order as in String.*/
 
-    public static Deque<Character> wordToDeque(String word) {
+    public Deque<Character> wordToDeque(String word) {
         Deque<Character> d = new LinkedListDeque<>();
         for (int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
