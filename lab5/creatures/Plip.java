@@ -4,6 +4,7 @@ import huglife.Creature;
 import huglife.Direction;
 import huglife.Action;
 import huglife.Occupant;
+import huglife.HugLifeUtils;
 
 import java.awt.Color;
 import java.util.ArrayDeque;
@@ -35,9 +36,9 @@ public class Plip extends Creature {
      */
     public Plip(double e) {
         super("plip");
-        r = 0;
-        g = 0;
-        b = 0;
+        r = 99;
+        g = 63 + (int) Math.round((e * (96)));
+        b = 76;
         energy = e;
     }
 
@@ -57,7 +58,7 @@ public class Plip extends Creature {
      * that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
+        g = 63 + (int) Math.round((energy * (96)));
         return color(r, g, b);
     }
 
@@ -75,6 +76,10 @@ public class Plip extends Creature {
      */
     public void move() {
         // TODO
+        energy -= 0.15;
+        if (energy < 0.0) {
+            energy = 0.0;
+        }
     }
 
 
@@ -83,6 +88,10 @@ public class Plip extends Creature {
      */
     public void stay() {
         // TODO
+        energy += 0.2;
+        if (energy > 2.0) {
+            energy = 2.0;
+        }
     }
 
     /**
@@ -91,7 +100,8 @@ public class Plip extends Creature {
      * Plip.
      */
     public Plip replicate() {
-        return this;
+        energy = energy / 2;
+        return new Plip(this.energy);
     }
 
     /**
@@ -113,16 +123,40 @@ public class Plip extends Creature {
         boolean anyClorus = false;
         // TODO
         // (Google: Enhanced for-loop over keys of NEIGHBORS?)
-        // for () {...}
+        // Loop through every entry in the map, if value is empty, add direction
+        // to emptyNeighbors array deque.
+        for (Map.Entry<Direction, Occupant> entry : neighbors.entrySet()) {
+            Occupant oc = entry.getValue();
+            if (oc.name().equals("empty")) {
+                emptyNeighbors.add(entry.getKey());
+            }
+            if (oc.name().equals("clorus")) {
+                anyClorus = true;
+            }
+        }
 
-        if (false) { // FIXME
+        if (emptyNeighbors.isEmpty()) { // FIXME
             // TODO
+            // Return Stay action if there are no empty neighbors
+            return new Action(Action.ActionType.STAY);
         }
 
         // Rule 2
         // HINT: randomEntry(emptyNeighbors)
+        if (energy >= 1.0) {
+            return new Action(Action.ActionType.REPLICATE,
+                    HugLifeUtils.randomEntry(emptyNeighbors));
+        }
 
         // Rule 3
+        if (anyClorus) {
+            int randomD = HugLifeUtils.randomInt(0, 9);
+            // 50% chance of Plip moving when there is an adjacent Clorus
+            if (randomD > 4) {
+                return new Action(Action.ActionType.MOVE,
+                        HugLifeUtils.randomEntry(emptyNeighbors));
+            }
+        }
 
         // Rule 4
         return new Action(Action.ActionType.STAY);

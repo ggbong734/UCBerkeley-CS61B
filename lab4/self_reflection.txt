@@ -4,27 +4,33 @@ ArrayDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: Unfortunately, I did not get to see the staff solution.
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: This may sound very simple but I am proud of the minusOne and plusOne methods for the circular array structure which uses the modulo function (%) to keep 
+   the final number within the size of the array. The resize method was particularly challenging because of the four special cases and took extra time to
+   figure out. Completing that was probably the most rewarding part of the project. I used a couple of private helper methods getFirst and getLast to be clearer
+   to the reader. 
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: Having the four special cases for the resize method makes the cody somewhat bulky/verbose. Other than that section, the remaining parts of the program seem
+   compact and clean.
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: I did not get to speak with a partner about my program.
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
-A:
+A: I wish I would have known about taking the time to comprehensively review all possibilities/special cases before jumping in to write the code and do
+   a change-and-pray essentially. Writing the different scenarios on paper help visualize the coding approach and break the big problem into more manageable
+   pieces. Knowing how to use the modulo function cleverly will also help accelerate my completion time. I learned about this technique by consulting a friend.
 
 Q: If you wrote ArrayDeque again, what would you do differently, if anything?
 
-A:
+A: Given what I know now, I will write it in a similar way. I may change the approach after completing this course and learning more advanced techniques.
 
 -----
 
@@ -32,23 +38,24 @@ LinkedListDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: Unfortunately, I did not get to see the staff solution.
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: I am proud that the code passed the extensive Gradescope tests even after numerous multiple submits. 
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: For the removeFirst and removeLast methods, i ended up using a double .next.next and .prev.prev calls which seem somewhat risky but the circular implementation of
+   the DLList is brilliant that code will not run into a null error issue.
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
-A:
+A: I did not get to discuss my code with another student. 
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: I appreciate that Josh introduced the concept of circular linked list which made the solution very elegant. 
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 
