@@ -2,6 +2,11 @@ package es.datastructur.synthesizer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/** @author Gerry Bong
+ *  Date: 04/27/2019
+ *  Skeleton code provided by Josh Hug
+ */
+
 //Make sure to that this class and all of its methods are public
 //Make sure to add the override tag for all overridden methods
 //Make sure to make this class implement BoundedQueue<T>
@@ -95,7 +100,13 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
     }
 
     // When you get to part 4, implement the needed code to support
-    //       iteration and equals.
+    //    //       iteration and equals.
+    /**
+     * Add an iterator method and a private iterator class (with
+     * next() and hasNext() functions) that allows ArrayRingBuffer
+     * to be iterated in an enhanced-for-loop.
+     */
+
     @Override
     public Iterator<T> iterator() {
         return new ArrayRBIterator();
@@ -135,11 +146,17 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
         }
     }
 
+    /**
+     *  Checks if an object is equal to this object.
+     *  Returns true only if the other object is of
+     *  ArrayRingBuffer class with the exact same values.
+     */
+
     @Override
     public boolean equals(Object o) {
-        if (o.getClass() == this.getClass()) {
+        if (o.getClass() == this.getClass()) {  //checks class
             ArrayRingBuffer<T> newO = (ArrayRingBuffer<T>) o;
-            if (newO.fillCount() == this.fillCount()) {
+            if (newO.fillCount() == this.fillCount()) {  //then check elements
                 for (T element : this) {
                     for (T elementO : (ArrayRingBuffer<T>) o) {
                         if (element != elementO) {

@@ -1,5 +1,10 @@
 package es.datastructur.synthesizer;
 
+/** @author Gerry Bong
+ *  Date: 04/27/2019
+ *  Skeleton code and help comments provided by Josh Hug
+ */
+
 //Note: This file will not compile until you complete task 1 (BoundedQueue).
 public class GuitarString {
     /** Constants. Do not change. In case you're curious, the keyword final

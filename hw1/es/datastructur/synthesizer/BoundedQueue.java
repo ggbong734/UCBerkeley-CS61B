@@ -1,6 +1,10 @@
 package es.datastructur.synthesizer;
 import java.util.Iterator;
 
+/** @author Gerry Bong
+ *  Date: 04/27/2019
+ */
+
 public interface BoundedQueue<T> extends Iterable<T> {
     int capacity();  // return size of the buffer
     int fillCount();  //return number of items currently in the buffer
