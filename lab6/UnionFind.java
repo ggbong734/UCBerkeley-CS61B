@@ -83,8 +83,9 @@ public class UnionFind {
         //Path compression by setting the id[] entry of each node along the way
         //directly to the root
         while (vertex != id[vertex]) {
+            int temp = vertex;
             vertex = id[vertex];
-            id[vertex] = root;
+            id[temp] = root;
         }
         return root;
     }

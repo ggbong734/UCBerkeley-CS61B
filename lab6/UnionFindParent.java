@@ -73,11 +73,11 @@ public class UnionFindParent {
         //Path compression by setting the id[] entry of each node along the way
         //directly to the root
         while (id[vertex] > -1) {
+            int temp = vertex;
             vertex = id[vertex];
-            id[vertex] = root;
+            id[temp] = root;
         }
         return root;
     }
-
 }
 
