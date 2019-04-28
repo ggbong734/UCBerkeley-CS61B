@@ -20,7 +20,7 @@ public class UnionFindParent {
 
     /* Throws an exception if v1 is not a valid index. */
     private void validate(int vertex) {
-        if (vertex > count || vertex < 0) {
+        if (vertex >= count || vertex < 0) {
             throw new IllegalArgumentException();
         }
     }
