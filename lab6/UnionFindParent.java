@@ -1,15 +1,13 @@
 /** Implementation of Weighted Union Find (Disjoint Set) with Path Compression
  *  Implementation tracks size of root node in parent array (does not create a
  *  separate array to track size)
- *  The code for this class is sourced from Algorithms textbook by Robert
- *  Sedgewick and Kevin Wayne page 228.
- *
+ * @author Gerry Bong
+ * CS 61B Lab 6
  */
 
-public class UnionFind {
+public class UnionFindParent {
 
     private int[] id;  // parent link (site indexed)
-    private int[] sz;  // size of component for roots (site indexed)
     private int count; // number of components
 
     /* Creates a UnionFind data structure holding n vertices. Initially, all
@@ -17,13 +15,7 @@ public class UnionFind {
     public UnionFind(int n) {
         count = n;
         id = new int[n];
-        for (int i = 0; i < n; i++) {
-            id[i] = i;
-        }
-        sz = new int[n];
-        for (int i = 0; i < n; i++) {
-            sz[i] = 1;  //all nodes start with size 1
-        }
+        for (int i = 0; i < n; i++) id[i] = -1; // all nodes start with size 1
     }
 
     /* Throws an exception if v1 is not a valid index. */
@@ -35,16 +27,17 @@ public class UnionFind {
 
     /* Returns the size of the set v1 belongs to. */
     public int sizeOf(int v1) {
-        return sz[find(v1)]; // root node has the size in sz[]
+        return -id[find(v1)];
     }
 
     /* Returns the parent of v1. If v1 is the root of a tree, returns the
        negative size of the tree for which v1 is the root. */
     public int parent(int v1) {
-        if (v1 == id[v1]) {
-            return -sz[v1];
+        if (id[v1] < 0) {
+            return -id[v1]; //return size of root if at root node
+        } else {
+            return id[v1];  //return parent of node if not root
         }
-        return id[v1];
     }
 
     /* Returns true if nodes v1 and v2 are connected. */
@@ -52,10 +45,10 @@ public class UnionFind {
         return find(v1) == find(v2);
     }
 
-    /* Connects two elements v1 and v2 together. v1 and v2 can be any valid 
+    /* Connects two elements v1 and v2 together. v1 and v2 can be any valid
        elements, and a union-by-size heuristic is used. If the sizes of the sets
-       are equal, tie break by connecting v1's root to v2's root. Unioning a 
-       vertex with itself or vertices that are already connected should not 
+       are equal, tie break by connecting v1's root to v2's root. Unioning a
+       vertex with itself or vertices that are already connected should not
        change the sets but may alter the internal structure of the data. */
     public void union(int v1, int v2) {
         int root1 = find(v1);
@@ -63,12 +56,12 @@ public class UnionFind {
         if (root1 == root2) {
             return;
         }
-        if (sz[root1] <= sz[root2]) {
+        if (id[root1] >= id[root2]) { //size of root1 <= than root2
+            id[root2] += id[root1];
             id[root1] = root2;
-            sz[root2] += sz[root1];
         } else {
+            id[root1] += id[root2];
             id[root2] = root1;
-            sz[root1] += sz[root2];
         }
     }
 
@@ -76,13 +69,10 @@ public class UnionFind {
        allowing for fast search-time. */
     public int find(int vertex) {
         int root = vertex;
-        while (root != id[root]) {
-            root = id[root];
-        }
-
+        while (id[root] > -1) root = id[root];
         //Path compression by setting the id[] entry of each node along the way
         //directly to the root
-        while (vertex != id[vertex]) {
+        while (id[vertex] > -1) {
             vertex = id[vertex];
             id[vertex] = root;
         }
@@ -90,3 +80,4 @@ public class UnionFind {
     }
 
 }
+
