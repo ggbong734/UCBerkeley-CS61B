@@ -23,7 +23,7 @@ public class PercolationStats {
                 int col = StdRandom.uniform(N);
                 percItem.open(row, col);
             }
-            percThresholds[i] = percItem.numberOfOpenSites() / (N * N);
+            percThresholds[i] = percItem.numberOfOpenSites() * 1.0 / (N * N);
         }
     }
 
