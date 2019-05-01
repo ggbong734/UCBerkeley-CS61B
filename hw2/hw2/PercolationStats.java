@@ -4,15 +4,18 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
     private int numberOfExpt;
-    private int[] percThresholds;
+    private double[] percThresholds;
 
     //perform T independent experiments on an N-by-N grid
     // Generate an array of T percolation thresholds at the
     // end of the T experiments
     public PercolationStats(int N, int T, PercolationFactory pf) {
+        if (N < 1 || T <= 0) {
+            throw new IllegalArgumentException();
+        }
         numberOfExpt = T;
-        percThresholds = new int[T];
-        for(int i = 0; i < numberOfExpt; i++) {
+        percThresholds = new double[T];
+        for (int i = 0; i < numberOfExpt; i++) {
             Percolation percItem;
             percItem = pf.make(N);
             while (!percItem.percolates()) {

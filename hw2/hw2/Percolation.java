@@ -4,8 +4,6 @@
 package hw2;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import java.lang.IllegalArgumentException;
-import java.lang.IndexOutOfBoundsException;
 
 public class Percolation {
     private int length;
@@ -34,7 +32,7 @@ public class Percolation {
         bottomVirtualNodeIndex = N * N + 1;
         totalOpen = 0;
         grid = new int [N][N];
-        for(int i = 0; i < N; i ++) {
+        for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 grid[i][j] = 0;
             }
@@ -73,7 +71,7 @@ public class Percolation {
         // open cell
         int[] dR = new int[]{-1, 0, 1, 0};
         int[] dC = new int[]{0, -1, 0, 1};
-        for (int i = 0; i < 4 ; i++) {
+        for (int i = 0; i < 4; i++) {
             int nR = row + dR[i];
             int nC = col + dC[i];
             if ((0 <= nR) && (nR < length)
@@ -90,7 +88,8 @@ public class Percolation {
         if (row == 0) {
             gridDisjointSet.union(currIndex, topVirtualNodeIndex);
             extraDS.union(currIndex, topVirtualNodeIndex);
-        } else if (row == (length - 1)) {
+        }
+        if (row == (length - 1)) {
             gridDisjointSet.union(currIndex, bottomVirtualNodeIndex);
         }
 
@@ -124,7 +123,6 @@ public class Percolation {
     }
 
     // use for unit testing (not required, but keep for autograder)
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
     }
 }
