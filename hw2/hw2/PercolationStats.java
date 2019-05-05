@@ -23,6 +23,7 @@ public class PercolationStats {
                 int col = StdRandom.uniform(N);
                 percItem.open(row, col);
             }
+            // add *1.0 to convert value to double
             percThresholds[i] = percItem.numberOfOpenSites() * 1.0 / (N * N);
         }
     }

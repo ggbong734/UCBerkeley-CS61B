@@ -85,6 +85,7 @@ public class Percolation {
         // if the cell is on the top row, connect if with the top
         // virtual node, but if the cell is on the bottom row,
         // connect if with the bottom virtual node.
+        // Can't use else if for second condition because N could be 1.
         if (row == 0) {
             gridDisjointSet.union(currIndex, topVirtualNodeIndex);
             extraDS.union(currIndex, topVirtualNodeIndex);
@@ -92,7 +93,6 @@ public class Percolation {
         if (row == (length - 1)) {
             gridDisjointSet.union(currIndex, bottomVirtualNodeIndex);
         }
-
     }
 
     // is the site (row, col) open?
