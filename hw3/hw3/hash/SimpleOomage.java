@@ -34,10 +34,16 @@ public class SimpleOomage implements Oomage {
             return red + green + blue;
         } else {
             // Write a perfect hash function for Simple Oomages.
+            //We divide the red, blue, green by 5 since they are
+            // multiples of 5. This way the hash final value is
+            // not a multiple of 5 which can cause issues if the
+            // bucket size, M, is a multiple of 5. The issue is
+            // that the Oomage objects will be placed in bucket[0]
+            // and bucket[5].
             int hash = 0;
-            hash = 52 * hash + red;
-            hash = 52 * hash + green;
-            hash = 52 * hash + blue;
+            hash = 52 * hash + red/5;
+            hash = 52 * hash + green/5;
+            hash = 52 * hash + blue/5;
             return hash;
         }
     }

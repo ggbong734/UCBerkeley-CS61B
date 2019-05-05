@@ -1,7 +1,5 @@
 package hw3.hash;
 
-import edu.princeton.cs.algs4.StdRandom;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +16,14 @@ public class HashTableVisualizer {
 
         double scale = 0.8;
         int N = 100;
-        int M = 9;
+        int M = 10;
 
         HashTableDrawingUtility.setScale(scale);
         List<Oomage> oomies = new ArrayList<>();
         for (int i = 0; i < N; i += 1) {
             SimpleOomage newRandom = SimpleOomage.randomSimpleOomage();
             oomies.add(newRandom);
-            System.out.println(newRandom.hashCode());
+            //System.out.println(newRandom.hashCode());
             //oomies.add(ComplexOomage.randomComplexOomage());
         }
         visualize(oomies, M, scale);

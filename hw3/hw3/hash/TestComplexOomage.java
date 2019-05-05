@@ -35,6 +35,18 @@ public class TestComplexOomage {
 
     /* Create a list of Complex Oomages called deadlyList
      * that shows the flaw in the hashCode function.
+     *
+     * To show flaw in the hashcode algorithm: The hashcode is base 256
+     * which means after the number of items in param get bigger than
+     * 4, the hashcode will become zero since the hashcode will exceed
+     * 2 billion (the max integer java can hold). Thus to exploit this
+     * limitation, we need to set the last four items of params to a
+     * fixed value while randomizing the first four items.
+     * The first four items will end up adding the highest values to
+     * the hashcode but will instead become zero since the number
+     * limit is reached. The last four items has fixed params and
+     * will equal to the same hashcode.
+     * All the hashcode of this object will be of the same value.
      */
 
     @Test
