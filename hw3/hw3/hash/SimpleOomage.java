@@ -41,9 +41,9 @@ public class SimpleOomage implements Oomage {
             // that the Oomage objects will be placed in bucket[0]
             // and bucket[5].
             int hash = 0;
-            hash = 52 * hash + red/5;
-            hash = 52 * hash + green/5;
-            hash = 52 * hash + blue/5;
+            hash = 52 * hash + red / 5;
+            hash = 52 * hash + green / 5;
+            hash = 52 * hash + blue / 5;
             return hash;
         }
     }
