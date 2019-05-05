@@ -14,11 +14,11 @@ public class SimpleOomage implements Oomage {
 
     @Override
     public boolean equals(Object o) {
-        // TODO: Write this method.
-        if(o == null) {
+        // Write this method.
+        if (o == null) {
             return false;
         }
-        if(this.getClass() !=  o.getClass()) {
+        if (this.getClass() !=  o.getClass()) {
             return false;
         }
         SimpleOomage that = (SimpleOomage) o;
@@ -33,11 +33,11 @@ public class SimpleOomage implements Oomage {
         if (!USE_PERFECT_HASH) {
             return red + green + blue;
         } else {
-            // TODO: Write a perfect hash function for Simple Oomages.
-            int hash = 0;
-            hash = 53 * hash + red;
-            hash = 53 * hash + green;
-            hash = 53 * hash + blue;
+            // Write a perfect hash function for Simple Oomages.
+            int hash = 17;
+            hash = 61 * hash + red;
+            hash = 61 * hash + green;
+            hash = 61 * hash + blue;
             return hash;
         }
     }
