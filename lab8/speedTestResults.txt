@@ -1,0 +1,11 @@
+Insert Ordered items
+10000 items
+ULLMap 3.11 
+MyHashMap 0.05 
+Java HashMap 0.02   
+
+Insert Random items
+10000 items 
+ULLMap 0.60 
+MyHashMap 0.04 
+Java HashMap 0.02
