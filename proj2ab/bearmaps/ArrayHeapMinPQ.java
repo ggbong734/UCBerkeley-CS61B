@@ -34,7 +34,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
 
     // swap key and priority value in index k and j of key and priority arrays
     private void swap(int k, int j) {
-        T temp= keyArr.get(k);
+        T temp = keyArr.get(k);
         keyTable.replace(temp, j);            //change hashtable first
         keyTable.replace(keyArr.get(j), k);
 
@@ -89,26 +89,24 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
     /* Sink the node to the right place. if there is a tie in priority, sink node to
        the left branch. always swaps with the node with lowest priority.
      */
+
+
     private void sink(int k) {
         // node is at the bottom node (leaf)
         if (leftChild(k) > arrSize) {
             return;
-        }
-        // node has left child but no right child
-        else if (rightChild(k) > arrSize) {
+        } else if (rightChild(k) > arrSize) {   // node has left child but no right child
             if (priArr.get(k) > priArr.get(leftChild(k))) {
                 swap(k, leftChild(k));
                 sink(leftChild(k));
             }
-        }
-        // node has both left and right children
-        else {
-            if (priArr.get(k) > priArr.get(leftChild(k)) &&
-                    priArr.get(leftChild(k)) <= priArr.get(rightChild(k))) {
+        } else {                                // node has both left and right children
+            if (priArr.get(k) > priArr.get(leftChild(k))
+                    && priArr.get(leftChild(k)) <= priArr.get(rightChild(k))) {
                 swap(k, leftChild(k));
                 sink(leftChild(k));
-            } else if (priArr.get(k) > priArr.get(rightChild(k)) &&
-                    priArr.get(rightChild(k)) < priArr.get(leftChild(k))) {
+            } else if (priArr.get(k) > priArr.get(rightChild(k))
+                    && priArr.get(rightChild(k)) < priArr.get(leftChild(k))) {
                 swap(k, rightChild(k));
                 sink(rightChild(k));
             }
@@ -142,7 +140,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
      * doesn't exist. */
     @Override
     public void changePriority(T item, double priority) {
-        if(!contains(item)) {
+        if (!contains(item)) {
             throw new NoSuchElementException();
         }
         int id = keyTable.get(item); //get index of item in heap array
