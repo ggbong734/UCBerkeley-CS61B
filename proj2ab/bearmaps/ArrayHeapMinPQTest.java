@@ -58,7 +58,7 @@ public class ArrayHeapMinPQTest {
     }
 
     @Test
-    public void testEdgeCases() {
+    public void testEdgeCases1() {
         ArrayHeapMinPQ<String> pq = new ArrayHeapMinPQ<>();
         pq.add("first", 0.1);
         pq.add("second", 0.3);
@@ -70,4 +70,5 @@ public class ArrayHeapMinPQTest {
         pq.removeSmallest();
         assertEquals("second", pq.removeSmallest());
     }
+
 }

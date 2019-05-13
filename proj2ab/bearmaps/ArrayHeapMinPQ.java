@@ -1,7 +1,14 @@
 package bearmaps;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
+
+/** @author Gerry Bong
+ *  Min PQ Heap implementation using ArrayList
+ *  Top item of the heap has the lowest priority
+ *  Hashtable is used to store the location of each key to speed up find() and contain()
+ */
 
 public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
 
@@ -89,7 +96,6 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
     /* Sink the node to the right place. if there is a tie in priority, sink node to
        the left branch. always swaps with the node with lowest priority.
      */
-
 
     private void sink(int k) {
         // node is at the bottom node (leaf)
