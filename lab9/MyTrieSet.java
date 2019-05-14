@@ -28,13 +28,16 @@ public class MyTrieSet implements TrieSet61B {
         size = 0;
     }
 
+
     /** Clears all items out of Trie */
+    @Override
     public void clear() {
         root = new Node();
         size = 0;
     }
 
     /** Returns true if the Trie contains KEY, false otherwise */
+    @Override
     public boolean contains(String key) {
         if (key == null) {
             throw new IllegalArgumentException("argument to contains() is null");
@@ -61,6 +64,7 @@ public class MyTrieSet implements TrieSet61B {
 
 
     /** Inserts string KEY into Trie */
+    @Override
     public void add(String key) {
         if (key == null) {
             throw new IllegalArgumentException("first argument to put() is null");
@@ -91,6 +95,7 @@ public class MyTrieSet implements TrieSet61B {
 
 
     /** Returns a list of all words that start with PREFIX */
+    @Override
     public List<String> keysWithPrefix(String prefix) {
         List<String> container = new ArrayList<>();
         StringBuilder toAdd = new StringBuilder();
@@ -128,6 +133,7 @@ public class MyTrieSet implements TrieSet61B {
      * Not required for Lab 9. If you don't implement this, throw an
      * UnsupportedOperationException.
      */
+    @Override
     public String longestPrefixOf(String key) {
         StringBuilder container = new StringBuilder();
         String result = "";
