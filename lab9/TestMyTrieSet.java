@@ -54,6 +54,22 @@ public class TestMyTrieSet {
         }
     }
 
+    @Test
+    public void longestPrefixTest() {
+        String[] preStrings = new String[]{"gen", "general", "g", "gene", "eneraliz"};
+
+        MyTrieSet t = new MyTrieSet();
+        for (String s: preStrings) {
+            t.add(s);
+        }
+
+        String longWord = "generalize";
+        t.add(longWord);
+
+        String answer = t.longestPrefixOf(longWord);
+        assertEquals("general", answer);
+    }
+
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestMyTrieSet.class);
     }
