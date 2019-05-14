@@ -11,6 +11,8 @@ public class NaivePointSet implements PointSet {
 
     /* Returns the closest point to the inputted coordinates.
      * This should take θ(N) time where N is the number of points.
+     * This is the brute force method of checking every node in the
+     * tree and computing the distance to the goal.
      */
     public Point nearest(double x, double y) {
         if (points == null) {
