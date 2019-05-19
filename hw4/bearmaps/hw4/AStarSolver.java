@@ -46,6 +46,13 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         edgeTo = new HashMap<>();
         visitedVertices = new HashSet<>();
 
+        // Checks if start condition is end
+        if (start.equals(end)) {
+            outcome = SolverOutcome.SOLVED;
+            explorationTime = sw.elapsedTime();
+            return;
+        }
+
         // Insert source vertex into PQ and insert source into
         fringe.add(start, 0);
         distTo.put(start, 0.0);
