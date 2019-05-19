@@ -1,7 +1,6 @@
 package bearmaps.hw4;
 
 import bearmaps.proj2ab.ArrayHeapMinPQ;
-import bearmaps.proj2ab.DoubleMapPQ;
 import bearmaps.proj2ab.ExtrinsicMinPQ;
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -37,7 +36,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         numStatesExplored = 0;
         explorationTime = 0;
 
-        ExtrinsicMinPQ<Vertex> fringe = new DoubleMapPQ<>();
+        ExtrinsicMinPQ<Vertex> fringe = new ArrayHeapMinPQ<>();
         HashMap<Vertex, Double> distTo = new HashMap<>();
         HashMap<Vertex, Vertex> edgeTo = new HashMap<>();
 
