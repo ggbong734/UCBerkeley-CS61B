@@ -1,6 +1,7 @@
 package bearmaps.hw4;
 
 import bearmaps.proj2ab.ArrayHeapMinPQ;
+import bearmaps.proj2ab.DoubleMapPQ;
 import bearmaps.proj2ab.ExtrinsicMinPQ;
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -12,8 +13,6 @@ import java.util.List;
  *  this is hw4 of CS61B Sp 2019 course
  *  for with pseudocode help from Josh Hug and yngz
  *  https://github.com/yngz/cs61b/blob/master/hw4/bearmaps/hw4/AStarSolver.java
- *
- * @param <Vertex>
  */
 
 public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
@@ -38,7 +37,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         numStatesExplored = 0;
         explorationTime = 0;
 
-        ExtrinsicMinPQ<Vertex> fringe = new ArrayHeapMinPQ<>();
+        ExtrinsicMinPQ<Vertex> fringe = new DoubleMapPQ<>();
         HashMap<Vertex, Double> distTo = new HashMap<>();
         HashMap<Vertex, Vertex> edgeTo = new HashMap<>();
 
