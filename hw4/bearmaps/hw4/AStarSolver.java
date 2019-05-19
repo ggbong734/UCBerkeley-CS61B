@@ -1,6 +1,6 @@
 package bearmaps.hw4;
 
-import bearmaps.proj2ab.ArrayHeapMinPQ;
+import bearmaps.proj2ab.DoubleMapPQ;
 import edu.princeton.cs.algs4.Stopwatch;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
 
-    private ArrayHeapMinPQ<Vertex> fringe;
+    private DoubleMapPQ<Vertex> fringe;
     private SolverOutcome outcome;
     private ArrayList<Vertex> solutionArray;
     private double solutionWeight;
@@ -33,10 +33,11 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
      * all other methods to return their results in constant time.
      * Note that timeout passed in is in seconds.
      */
-    public AStarSolver(AStarGraph<Vertex> input, Vertex start, Vertex end, double timeout) {
+    public AStarSolver(AStarGraph<Vertex> input, Vertex start,
+                       Vertex end, double timeout) {
         Stopwatch sw = new Stopwatch();
 
-        fringe = new ArrayHeapMinPQ<>();
+        fringe = new DoubleMapPQ<>();
         solutionArray = new ArrayList<>();
         outcome = null;
         solutionWeight = 0;
