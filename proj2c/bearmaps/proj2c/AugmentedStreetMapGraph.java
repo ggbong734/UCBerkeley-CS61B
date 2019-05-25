@@ -4,6 +4,8 @@ import bearmaps.hw4.streetmap.Node;
 import bearmaps.hw4.streetmap.StreetMapGraph;
 import bearmaps.proj2ab.KDTree;
 import bearmaps.proj2ab.Point;
+import bearmaps.proj2ab.PointSet;
+import bearmaps.proj2ab.WeirdPointSet;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -41,10 +43,8 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
 
         for (Node n : nodes) {
             // Only insert points with neighbors to array and map
-            if (!neighbors(n.id()).isEmpty()) {
-                double la = n.lat();
-                double lo = n.lon();
-                Point p = new Point(la, lo);
+            if (neighbors(n.id()).size() > 0) {
+                Point p = new Point(n.lat(), n.lon());
                 points.add(p);
                 pointToNode.put(p, n);
             }
@@ -72,8 +72,8 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * @return The id of the node in the graph closest to the target.
      */
     public long closest(double lon, double lat) {
-        KDTree kdTree = new KDTree(points);
-        Point nearestPoint = kdTree.nearest(lon, lat);
+        PointSet ps = new WeirdPointSet(points);
+        Point nearestPoint = ps.nearest(lon, lat);
         Node nearestNode = pointToNode.get(nearestPoint);
 
         return nearestNode.id();

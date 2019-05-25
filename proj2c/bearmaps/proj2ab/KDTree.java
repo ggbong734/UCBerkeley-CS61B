@@ -7,7 +7,7 @@ import java.util.List;
  *  https://www.youtube.com/watch?v=KsA5Kfs1gTg&feature=youtu.be
  */
 
-public class KDTree {
+public class KDTree implements PointSet{
 
     private List<Point> points;
     private Node root;
@@ -82,7 +82,7 @@ public class KDTree {
     /* Returns the closest point to the inputted coordinates.
      * This should take O(logN) time on average, where N is the number of points.
      */
-
+    @Override
     public Point nearest(double x, double y) {
         if (points == null) {
             throw new NullPointerException();
