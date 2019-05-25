@@ -2,23 +2,65 @@ package bearmaps.proj2c;
 
 import bearmaps.hw4.streetmap.Node;
 import bearmaps.hw4.streetmap.StreetMapGraph;
+import bearmaps.proj2ab.KDTree;
 import bearmaps.proj2ab.Point;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * An augmented graph that is more powerful that a standard StreetMapGraph.
  * Specifically, it supports the following additional operations:
  *
  *
- * @author Alan Yao, Josh Hug, ________
+ * @author Alan Yao, Josh Hug, Gerry Bong, Yang Zuo
+ * with help from https://github.com/yngz/cs61b/tree/master/proj2c/bearmaps/proj2c
  */
 public class AugmentedStreetMapGraph extends StreetMapGraph {
+    private List<Point> points;
+    private Map<Point, Node> pointToNode;
+    private MyTrieSet trieSet;
+    private Map<String, List<Node>> nameToNodes;
 
     public AugmentedStreetMapGraph(String dbPath) {
         super(dbPath);
-        // You might find it helpful to uncomment the line below:
-        // List<Node> nodes = this.getNodes();
+
+        List<Node> nodes = this.getNodes();
+        //Create an array of points to construct KDTree
+        points = new ArrayList<>();
+        //Create a map<Point, Node> to convert point to node
+        pointToNode = new HashMap<>();
+
+        //Create a Trie Set for the prefix autocomplete
+        trieSet = new MyTrieSet();
+        //Create a map<String(cleanName), Node> for easy search for Part III
+        nameToNodes = new HashMap<>();
+
+        for (Node n : nodes) {
+            // Only insert points with neighbors to array and map
+            if (!neighbors(n.id()).isEmpty()) {
+                double la = n.lat();
+                double lo = n.lon();
+                Point p = new Point(la, lo);
+                points.add(p);
+                pointToNode.put(p, n);
+            }
+
+            // Insert vertex names into Trie Set
+            if (n.name() != null) {
+                String cleanName = cleanString(n.name());
+                trieSet.add(cleanName);
+
+                // Add list of nodes with same name into a map<String, List<Node>>
+                if (!nameToNodes.containsKey(cleanName)) {
+                    nameToNodes.put(cleanName, new LinkedList<>());
+                }
+                nameToNodes.get(cleanName).add(n);
+            }
+        }
     }
 
 
@@ -30,7 +72,11 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * @return The id of the node in the graph closest to the target.
      */
     public long closest(double lon, double lat) {
-        return 0;
+        KDTree kdTree = new KDTree(points);
+        Point nearestPoint = kdTree.nearest(lon, lat);
+        Node nearestNode = pointToNode.get(nearestPoint);
+
+        return nearestNode.id();
     }
 
 
@@ -43,7 +89,17 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * cleaned <code>prefix</code>.
      */
     public List<String> getLocationsByPrefix(String prefix) {
-        return new LinkedList<>();
+        //use lab 9 trie set to generate list of strings with the prefix
+        List<String> cleanNames = trieSet.keysWithPrefix(cleanString(prefix));
+        List<String> fullNames = new LinkedList<>();
+        for (String name : cleanNames) {
+            for (Node n : nameToNodes.get(name)) {
+                if (!fullNames.contains(n.name())) {
+                    fullNames.add(n.name());
+                }
+            }
+        }
+        return fullNames;
     }
 
     /**
@@ -60,7 +116,19 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * "id" -> Number, The id of the node. <br>
      */
     public List<Map<String, Object>> getLocations(String locationName) {
-        return new LinkedList<>();
+        List<Map<String, Object>> locationList = new LinkedList<>();
+        String cleanName = cleanString(locationName);
+        if (nameToNodes.containsKey(cleanName)) {
+            for (Node n : nameToNodes.get(cleanName)) {
+                Map<String, Object> location = new HashMap<>();
+                location.put("lat", n.lat());
+                location.put("lon", n.lon());
+                location.put("name", locationName);
+                location.put("id", n.id());
+                locationList.add(location);
+            }
+        }
+        return locationList;
     }
 
 

@@ -17,8 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static bearmaps.proj2c.utils.Constants.SEMANTIC_STREET_GRAPH;
-import static bearmaps.proj2c.utils.Constants.ROUTE_LIST;
+import static bearmaps.proj2c.utils.Constants.*;
 
 /**
  * Handles requests from the web browser for map images. These images
@@ -84,11 +83,78 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
      */
     @Override
     public Map<String, Object> processRequest(Map<String, Double> requestParams, Response response) {
+        Map<String, Object> results = new HashMap<>();
+
+        double ullat = requestParams.get("ullat");
+        double ullon = requestParams.get("ullon");
+        double lrlat = requestParams.get("lrlat");
+        double lrlon = requestParams.get("lrlon");
+
+        // request params don't make sense
+        if (ullat <= lrlat || ullon >= lrlon) {
+            return queryFail();
+        }
+
+        // if query box is COMPLETELY outside of ROOT map area
+        if (lrlat > ROOT_ULLAT || lrlon < ROOT_ULLON || ullat < ROOT_LRLAT || ullon > ROOT_LRLON) {
+            return queryFail();
+        }
+
+        // Getting the right depth level for the images.LonDPP of image (blurriness) has to be
+        // lower than the request
+        int d = 0;
+        double LonDDPImage = getLonDPP(ROOT_LRLON, ROOT_ULLON, TILE_SIZE * 1.0);
+        double LonDDPQuery = getLonDPP(lrlon, ullon, requestParams.get("w"));
+        while (LonDDPQuery < LonDDPImage && d < 7) {
+            LonDDPImage = LonDDPImage / 2;
+            d += 1;
+        }
+
+        // Calculate x_lo, x_hi, y_lo, y_hi of image to be rastered where x and y are
+        // the column and row numbers respectively. x = lon; y = lat;
+        // Example: when d = 3, maxRow is 7
+        double maxRow = Math.pow(2, d) - 1;
+
+        double latInterval = (ROOT_ULLAT - ROOT_LRLAT) / (maxRow + 1);
+        double lonInterval = (ROOT_LRLON - ROOT_ULLON) / (maxRow + 1);
+
+        int yLo = (int) ((ROOT_ULLAT - ullat) / latInterval);
+        int yHi = (int) ((ROOT_ULLAT - lrlat) / latInterval);
+        int xLo = (int) ((ullon - ROOT_ULLON) / lonInterval);
+        int xHi = (int) ((lrlon - ROOT_ULLON) / lonInterval);
+
+        // to address corner case where requested image is PARTIALLY outside root map
+        yLo = Math.max(0, yLo);
+        yHi = Math.min(yHi, (int) Math.pow(2,d) - 1);
+        xLo = Math.max(0, xLo);
+        xHi = Math.min(xHi, (int) Math.pow(2,d) - 1);
+
+        // Insert map name into renderGrid String[][]
+        String[][] renderGrid = new String[yHi - yLo + 1][xHi - xLo + 1];
+        for (int i = 0; i <= yHi - yLo; i += 1) {
+            for (int j = 0; j <= xHi - xLo; j += 1) {
+                renderGrid[i][j] = "d" + d + "_x" + (j + xLo) + "_y" + (i + yLo) + ".png";
+            }
+        }
+
+        // Calculate raster ul and lr coordinates
+        double rasterULLat = ROOT_ULLAT - (yLo * latInterval);
+        double rasterLRLat = ROOT_ULLAT - (yHi + 1) * latInterval;
+        double rasterULLon = ROOT_ULLON + (xLo * lonInterval);
+        double rasterLRLon = ROOT_ULLON + (xHi + 1) * lonInterval;
+
+        results.put("render_grid", renderGrid);
+        results.put("raster_ul_lon", rasterULLon);
+        results.put("raster_ul_lat", rasterULLat);
+        results.put("raster_lr_lon", rasterLRLon);
+        results.put("raster_lr_lat", rasterLRLat);
+        results.put("depth", d);
+        results.put("query_success", true);
+
         //System.out.println("yo, wanna know the parameters given by the web browser? They are:");
         //System.out.println(requestParams);
-        Map<String, Object> results = new HashMap<>();
-        System.out.println("Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in "
-                + "your browser.");
+        //System.out.println("Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in "
+        //        + "your browser.");
         return results;
     }
 
@@ -115,6 +181,10 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         results.put("depth", 0);
         results.put("query_success", false);
         return results;
+    }
+
+    private double getLonDPP(double lrlon, double ullon, double width) {
+        return (lrlon - ullon) / width;
     }
 
     /**
