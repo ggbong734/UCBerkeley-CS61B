@@ -123,7 +123,7 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
                 Map<String, Object> location = new HashMap<>();
                 location.put("lat", n.lat());
                 location.put("lon", n.lon());
-                location.put("name", locationName);
+                location.put("name", n.name());
                 location.put("id", n.id());
                 locationList.add(location);
             }
