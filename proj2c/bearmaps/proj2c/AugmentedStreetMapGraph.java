@@ -44,7 +44,7 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
         for (Node n : nodes) {
             // Only insert points with neighbors to array and map
             if (neighbors(n.id()).size() > 0) {
-                Point p = new Point(n.lat(), n.lon());
+                Point p = new Point(n.lon(), n.lat());
                 points.add(p);
                 pointToNode.put(p, n);
             }
@@ -72,8 +72,8 @@ public class AugmentedStreetMapGraph extends StreetMapGraph {
      * @return The id of the node in the graph closest to the target.
      */
     public long closest(double lon, double lat) {
-        PointSet ps = new WeirdPointSet(points);
-        Point nearestPoint = ps.nearest(lon, lat);
+        PointSet kdTree = new KDTree(points);
+        Point nearestPoint = kdTree.nearest(lon, lat);
         Node nearestNode = pointToNode.get(nearestPoint);
 
         return nearestNode.id();

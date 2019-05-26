@@ -1,6 +1,7 @@
 package bearmaps.proj2c;
 
 import bearmaps.hw4.AStarSolver;
+import bearmaps.hw4.WeirdSolver;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class acts as a helper for the RoutingAPIHandler.
- * @author Josh Hug, ______
+ * @author Josh Hug, Gerry Bong
  */
 public class Router {
 

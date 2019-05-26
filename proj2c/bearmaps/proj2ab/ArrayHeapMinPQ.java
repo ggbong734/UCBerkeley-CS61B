@@ -144,7 +144,7 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
 
     /* Changes the priority of the given item. Throws NoSuchElementException if the item
      * doesn't exist. */
-    @Override
+    //@Override
     public void changePriority(T item, double priority) {
         if (!contains(item)) {
             throw new NoSuchElementException();
