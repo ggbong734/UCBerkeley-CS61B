@@ -24,7 +24,7 @@ public class MapGenerator {
 
     private static final int maxRoomSize = 7;
     private static final int maxHallLength = 6;
-    private static final double maxWorldLoadFactor = 0.45;
+    private static final double maxWorldLoadFactor = 0.42;
     private static final double PercentageToBuildRoom = 0.42;
 
     private Position lastHallwayEndPosition;
