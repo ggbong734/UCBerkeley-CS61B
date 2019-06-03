@@ -1,5 +1,8 @@
 package byow.lab12;
 
+import byow.Core.Constants;
+import byow.Core.MapGenerator;
+import byow.Core.Position;
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
@@ -8,8 +11,8 @@ import byow.TileEngine.Tileset;
  *  Draws a world that is mostly empty except for a small region.
  */
 public class BoringWorldDemo {
-    private static final int WIDTH = 60;
-    private static final int HEIGHT = 30;
+    private static final int WIDTH = 20;
+    private static final int HEIGHT = 20;
 
     public static void main(String[] args) {
         // initialize the tile rendering engine with a window of size WIDTH x HEIGHT
@@ -25,14 +28,18 @@ public class BoringWorldDemo {
         }
 
         // fills in a block 14 tiles wide by 4 tiles tall
-        for (int x = 20; x < 35; x += 1) {
-            for (int y = 5; y < 10; y += 1) {
-                world[x][y] = Tileset.WALL;
-            }
-        }
+//        for (int x = 20; x < 35; x += 1) {
+//            for (int y = 5; y < 10; y += 1) {
+//                world[x][y] = Tileset.WALL;
+//            }
+//        }
+
+        MapGenerator test = new MapGenerator();
+        test.drawRoom(world, Constants.EAST, new Position(10, 10));
 
         // draws the world to the screen
         ter.renderFrame(world);
+
     }
 
 

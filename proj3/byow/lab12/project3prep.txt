@@ -1,29 +1,42 @@
 Q: Can you think of an analogy between the process of tesselating hexagons and randomly generating a world using rooms and hallways? 
 What is the hexagon and what is the tesselation on the Project 3 side?
 
-A:
+A: In project 3, we have to build hallways and rooms which require tesselation of the walls and floor. The floor has to be
+   between the walls. For project 3, we also have to pick a starting point to generate the world, it can be the
+   bottom left corner similar to the hexagon example.
 
 -----
 Q: If you were to start working on world generation, what kind of method would you think of writing first? 
 Think back to the lab and the process used to eventually get to tesselating hexagons.
 
-A:
+A: I would create methods for extending the floor from a starting point. Another method is to generate rooms
+There can be multiple shapes for a room. Another method is to cover the room and floor with walls including
+the corners.
 
 -----
 Q: What distinguishes a hallway from a room? How are they similar?
 
-A:
+A: A room may have 1 or up to 3 entrances. The dimension of a room is randomized (i.e. a rectangle can have
+x width and y length). Hallways are always one tiles thick and they are long. There needs a
+random number to make them turn (L-shape).
 
 -----
 Q: For tesselating hexagons, one of the hardest parts is figuring out where to place each hexagon/how to easily place hexagons on screen in an algorithmic way. 
 After looking at your own implemention, consider the implementation provided near the end of the lab. 
 How did your implementation differ from the given one? What lessons can be learned from it?
 
-A:
+A: My implementation was to start at the bottom center hexagon and build the topLeft and topRight pieces that
+stretch two units from the bottom piece. Then i would build the next hexagon above the center bottom unit and build the
+topleft and topRight. The solution provided by Josh is a lot simpler since it considers 5 columns.
 
 -----
 Q: Consider an algorithm for placing rooms and hallways on your map. 
 Ideally, consider many algorithms and think about what makes some easier or harder to implement. Try and bring those ideas together into a single simple algorithm which accomplishes the task. 
 In general, algorithms with as few edge cases as possible are better algorithms.
 
-A:
+A: 1) randomly placing rooms in the world tile and connecting them with straight hallways. combine them if intersect
+
+2) create drawVerticalHall and drawHorizontalHall and drawCorner
+Create Room class and build an overlap method to check if a room overlaps
+
+Set max room size to 20% of smaller dimension of width or length of world (round down).

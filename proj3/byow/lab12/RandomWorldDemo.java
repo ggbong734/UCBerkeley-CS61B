@@ -35,7 +35,7 @@ public class RandomWorldDemo {
      *  chance of being empty space.
      */
     private static TETile randomTile() {
-        int tileNum = RANDOM.nextInt(3);
+        int tileNum = RANDOM.nextInt(3);  //draw random number from 0 to 2
         switch (tileNum) {
             case 0: return Tileset.WALL;
             case 1: return Tileset.FLOWER;
