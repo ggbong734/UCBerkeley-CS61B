@@ -7,54 +7,62 @@ import byow.TileEngine.TETile;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
-import java.util.Random;
+import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
 public class Engine {
     TERenderer ter = new TERenderer();
-    private Random rand;
     private boolean gameOver;
-    private boolean playerTurn;
+    private boolean hasKey;
+    private int turnNumber;
+    private ArrayList<String> allMoves = new ArrayList<>();
+
     /* Feel free to change the width and height. */
     public static final int WIDTH = 60;
     public static final int HEIGHT = 40;
+    private static final String[] ENCOURAGEMENT = {"You can do this!", "I believe in you!",
+            "You got this!", "You're a star!", "Go Bears!",
+            "Too easy for you!", "Wow, so impressive!"};
 
     /**
      * Method used for exploring a fresh world. This method should handle all inputs,
      * including inputs from the main menu.
      */
     public void interactWithKeyboard() {
-        ter.initialize(WIDTH, HEIGHT, 0, 3); // top offset for frame
+        ter.initialize(WIDTH, HEIGHT, 0 , 1); // top offset for frame
         gameOver = false;
         drawMenu();
         String menuChoice = solicitMenuInput();
         if(menuChoice.equals("Q")){ // quit selected
             gameOver = true;
             drawMiddle("You have chosen to quit the game. Later!");
+
         } else if (menuChoice.equals("L")) {
             //TODO: Fill Load functionality
+
         } else if (menuChoice.equals("N")) { // new game selected
             String seedS = solicitSeedInput();
             int seed = parseInt(seedS);
             TETile[][] world = new TETile[WIDTH][HEIGHT];
             MapGenerator mg = new MapGenerator(seed);
-            System.out.println("Seed is: " + seed);
             mg.generateRoomsAndHallways(world);
             ter.renderFrame(world);
-            // add avatar to map
-//            while (!gameOver) {
-//                //solicituserinput
-//                //can't move into wall
-//            }
+
+            turnNumber = 1;
+            while (!gameOver) {
+                drawHUDHeader(world, turnNumber);
+                String moveS = solicitMoveInput();
+                mg.moveAvatar(world, moveS);
+                ter.renderFrame(world);
+                allMoves.add(moveS);
+                turnNumber += 1;
+                gameOver = mg.isGameOver();
+                hasKey = mg.hasKey();
+            }
+            StdDraw.pause(700);
+            drawMiddle("Congratulations, you beat the game!");
         }
-        //solicit menu input
-        //draw menu
-        //options for start new game, etc
-        //take in keystrokes up to S
-        //initialize map with offset for the top GUI
-        //rendermap and draw gui on top
-        //add avatar to map on a FLOOR TILE near LOCKED DOOR or elsewhere
     }
 
     /**
@@ -138,7 +146,7 @@ public class Engine {
         StdDraw.setFont(font);
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.text(WIDTH / 2, HEIGHT * 3 / 4, "CS61B: THE GAME");
-        Font smallFont = new Font("Serif", Font.BOLD, 20);
+        Font smallFont = new Font("Serif", Font.BOLD, 25);
         StdDraw.setFont(smallFont);
         StdDraw.text(WIDTH / 2, HEIGHT / 2 + 2, "New Game (Press N)");
         StdDraw.text(WIDTH / 2, HEIGHT / 2, "Load Game (Press L)");
@@ -156,6 +164,36 @@ public class Engine {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.text(WIDTH / 2, HEIGHT / 2, s);
         StdDraw.show();
+    }
+
+    public void drawHUDHeader(TETile[][] world, int turnNumber) {
+        Font header = new Font("Monaco", Font.BOLD, 14);
+        StdDraw.setFont(header);
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.textLeft(1, HEIGHT - 1, "Round: " + turnNumber);
+        StdDraw.text(WIDTH / 2, HEIGHT - 1, "Move with W, S, A, or D");
+        StdDraw.text (WIDTH / 2 + 15, HEIGHT - 1, hasKey ? "Key Acquired, find Exit" : "Find the Key");
+        int xPos = (int) Math.min(Math.max(0, StdDraw.mouseX()), WIDTH - 1);
+        int yPos = (int) Math.min(Math.max(0, StdDraw.mouseY() - 1), HEIGHT - 1);
+        StdDraw.textRight(WIDTH - 1, HEIGHT - 1, world[xPos][yPos].description());
+        StdDraw.textRight(WIDTH - 1, 1, ENCOURAGEMENT[turnNumber % ENCOURAGEMENT.length]);
+        StdDraw.show();
+    }
+
+    public String solicitMoveInput() {
+        //Collect movement (W, S, A, D) input from user
+        String s = "";
+        while (s.length() < 1) {
+            if (!StdDraw.hasNextKeyTyped()) {
+                continue;
+            }
+            char c = Character.toUpperCase(StdDraw.nextKeyTyped());
+            if (c == 'W' || c == 'S' || c == 'A'|| c == 'D') {
+                s += c;
+            }
+        }
+        StdDraw.pause(100);
+        return s;
     }
 
     public String solicitMenuInput() {
@@ -192,5 +230,4 @@ public class Engine {
         StdDraw.pause(500);
         return s.substring(0, s.length() - 1); // removes last letter S
     }
-
 }

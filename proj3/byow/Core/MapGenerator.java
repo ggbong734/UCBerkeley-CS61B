@@ -20,6 +20,9 @@ import static byow.Core.Constants.WEST;
 
 public class MapGenerator {
     private Random RANDOM;
+    private Position avatarPosition;
+    private boolean hasKey = false;
+    private boolean gameOver = false;
 
     private static final int maxRoomSize = 7;
     private static final int maxHallLength = 6;
@@ -32,6 +35,7 @@ public class MapGenerator {
     public MapGenerator(int seed) {
         RANDOM = new Random(seed);
         existingRooms = new ArrayList<>();
+        avatarPosition = null;
     }
 
     /** Draws a room with random dimensions
@@ -486,6 +490,8 @@ public class MapGenerator {
     private void generateRoomsAndHallways(TETile[][] world, Position start, int startBearing) {
         //base case, end recursion when load factor is reached
         if (worldLoadFactor > maxWorldLoadFactor)  {
+            avatarPosition = drawOnRandomFloor(world, Tileset.AVATAR);
+            drawOnRandomFloor(world, Tileset.KEY); // Key to locked door
             return;
         }
         // create probability of picking each side
@@ -567,5 +573,66 @@ public class MapGenerator {
         int x = RandomUtils.uniform(RANDOM, 2, world.length - 2);
         int y = RandomUtils.uniform(RANDOM, 2, world[0].length - 2);
         return new Position(x, y);
+    }
+
+    /**randomly pick a position in the world, if it is FLOOR then replace with tile of choice
+     */
+    public Position drawOnRandomFloor(TETile[][] world, TETile tile) {
+        int rdWidth = RandomUtils.uniform(RANDOM, world.length);
+        int rdHeight = RandomUtils.uniform(RANDOM, world[0].length);
+        boolean itemDrawn = false;
+        while (!itemDrawn) {
+            if (world[rdWidth][rdHeight] == Tileset.FLOOR) {
+                world[rdWidth][rdHeight] = tile;
+                itemDrawn = true;
+            } else {
+                rdWidth = RandomUtils.uniform(RANDOM, world.length);
+                rdHeight = RandomUtils.uniform(RANDOM, world[0].length);
+            }
+        }
+        return new Position(rdWidth, rdHeight);
+    }
+
+    private void moveAvatarAndFillTile(TETile[][] world, Position target) {
+        world[target.getX()][target.getY()] = Tileset.AVATAR;
+        world[avatarPosition.getX()][avatarPosition.getY()] = Tileset.FLOOR;
+        avatarPosition.updateX(target.getX());
+        avatarPosition.updateY(target.getY());
+    }
+
+    private void moveAvatarHelper(TETile[][] world, Position target) {
+        if (world[target.getX()][target.getY()] == Tileset.FLOOR) {
+            moveAvatarAndFillTile(world, target);
+        } else if (world[target.getX()][target.getY()] == Tileset.KEY) {
+            moveAvatarAndFillTile(world, target);
+            hasKey = true;
+        } else if (world[target.getX()][target.getY()] == Tileset.LOCKED_DOOR & hasKey) {
+            moveAvatarAndFillTile(world, target);
+            gameOver = true;
+        }
+    }
+
+    public void moveAvatar(TETile[][] world, String moveS) {
+        if (moveS.equals("A")) {
+            Position target = new Position(avatarPosition.getX() - 1, avatarPosition.getY());
+            moveAvatarHelper(world, target);
+        } else if (moveS.equals("D")) {
+            Position target = new Position(avatarPosition.getX() + 1, avatarPosition.getY());
+            moveAvatarHelper(world, target);
+        } else if (moveS.equals("W")) {
+            Position target = new Position(avatarPosition.getX(), avatarPosition.getY() + 1);
+            moveAvatarHelper(world, target);
+        } else if (moveS.equals("S")) {
+            Position target = new Position(avatarPosition.getX(), avatarPosition.getY() - 1);
+            moveAvatarHelper(world, target);
+        }
+    }
+
+    public boolean hasKey() {
+        return hasKey;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }

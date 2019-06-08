@@ -4,6 +4,7 @@ public class Position {
     private int x;
     private int y;
 
+    // Position(0,0) corresponds to the bottom left of the world
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
