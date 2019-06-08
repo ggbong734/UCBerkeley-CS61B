@@ -16,7 +16,7 @@ public class MapVisualTest {
 
         //initialize world
         TETile[][] world = new TETile[WIDTH][HEIGHT];
-        MapGenerator mg = new MapGenerator();
+        MapGenerator mg = new MapGenerator(123);
         mg.generateRoomsAndHallways(world);
 
 //        for (int x = 0; x < WIDTH; x += 1) {

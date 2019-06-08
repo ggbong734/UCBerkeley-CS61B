@@ -34,7 +34,7 @@ public class BoringWorldDemo {
 //            }
 //        }
 
-        MapGenerator test = new MapGenerator();
+        MapGenerator test = new MapGenerator(123);
         test.drawRoom(world, Constants.EAST, new Position(10, 10));
 
         // draws the world to the screen

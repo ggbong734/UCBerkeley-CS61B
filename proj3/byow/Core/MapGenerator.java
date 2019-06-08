@@ -19,18 +19,18 @@ import static byow.Core.Constants.EAST;
 import static byow.Core.Constants.WEST;
 
 public class MapGenerator {
-    private static final long SEED = 138;
-    private static final Random RANDOM = new Random(SEED);
+    private Random RANDOM;
 
     private static final int maxRoomSize = 7;
     private static final int maxHallLength = 6;
-    private static final double maxWorldLoadFactor = 0.42;
+    private static final double maxWorldLoadFactor = 0.35;
     private static final double PercentageToBuildRoom = 0.42;
 
     private Position lastHallwayEndPosition;
     private double worldLoadFactor = 0;
     private List<Room> existingRooms;
-    public MapGenerator() {
+    public MapGenerator(int seed) {
+        RANDOM = new Random(seed);
         existingRooms = new ArrayList<>();
     }
 
