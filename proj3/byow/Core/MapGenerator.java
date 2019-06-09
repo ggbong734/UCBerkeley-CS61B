@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/** This is project 3 of CS 61B Spring 2019 course at UC Berkeley. The tasks is to generate
- * a randomized map with rooms and hallways, similar to a 2D maze in a video game.
+/** This class generates a randomized maze with rooms and hallways.
+ * Rooms and hallways are connected with floor tiles. Randomization is done
+ * with a seed (pseudorandom) to give the game a deterministic behavior given
+ * a seed.
  * @author Gerry Bong
+ * This is project 3 of CS 61B Spring 2019 course at UC Berkeley.
  * Received instructions and guidance from Josh Hug, UC Berkeley professor.
  */
 
@@ -78,13 +81,6 @@ public class MapGenerator {
             goNorth = Math.min(height - goSouth - 1, maxNorth - 1);
         }
 
-        //pick another location to draw room if there is no space
-//        if ((goNorth + goSouth) <= 0 || (goEast + goWest) <= 0 ) {
-//            int rd = RandomUtils.uniform(RANDOM, existingRooms.size());
-//            Position rdEntrance = addEntranceToRoom(world, existingRooms.get(rd));
-//            int entranceBearing = existingRooms.get(rd).getLastEntranceDirection();
-//            return drawRoom(world, entranceBearing, rdEntrance);
-//        }
         //low left corner position of the room
         Position lowLeft = new Position(first.getX() - goWest, first.getY() - goSouth);
         Position topRight = new Position(first.getX() + goEast, first.getY() + goNorth);
@@ -99,7 +95,7 @@ public class MapGenerator {
         drawWallsAroundRoom(world, newRoom);
         addWorldLoadFactor(world, newRoom.getHeight() + 2, newRoom.getWidth() + 2);
 
-        System.out.println("Drew a room with height: " + goSouth + goNorth + " and width: " + goEast + goWest);
+        //System.out.println("Drew a room with height: " + goSouth + goNorth + " and width: " + goEast + goWest);
         return newRoom;
     }
 
@@ -111,16 +107,7 @@ public class MapGenerator {
      *  the first non-empty tile encountered.
      *  Starts at 1 to skip walls around start position.
      */
-//    private int maxNorth(TETile[][] world, Position start) {
-//        int nonEmptyTile = 0;
-//        for (int y = start.getY() + 1; y < world[0].length; y += 1) {
-//            if (world[start.getX()][y] != Tileset.NOTHING) {
-//                return nonEmptyTile;
-//            }
-//            nonEmptyTile += 1;
-//        }
-//        return nonEmptyTile;
-//    }
+
     private int maxNorth(TETile[][] world, Position start) {
         int nonEmptyTile = 1;
         for (int y = start.getY() + 2; y < world[0].length - 1; y += 1) {
@@ -135,16 +122,7 @@ public class MapGenerator {
     /** Returns the distance from the start Position to the South edge of the world or
      *  the first non-empty tile encountered.
      */
-//    private int maxSouth(TETile[][] world, Position start) {
-//        int nonEmptyTile = 0;
-//        for (int y = start.getY() - 1; y >= 0; y -= 1) {
-//            if (world[start.getX()][y] != Tileset.NOTHING) {
-//                return nonEmptyTile;
-//            }
-//            nonEmptyTile += 1;
-//        }
-//        return nonEmptyTile;
-//    }
+
     private int maxSouth(TETile[][] world, Position start) {
         int nonEmptyTile = 1;
         for (int y = start.getY() - 2; y >= 0; y -= 1) {
@@ -159,16 +137,7 @@ public class MapGenerator {
     /** Returns the distance from the start Position to the East edge of the world or
      *  the first non-empty tile encountered.
      */
-//    private int maxEast(TETile[][] world, Position start) {
-//        int nonEmptyTile = 0;
-//        for (int x = start.getX() + 1; x < world.length; x += 1) {
-//            if (world[x][start.getY()] != Tileset.NOTHING) {
-//                return nonEmptyTile;
-//            }
-//            nonEmptyTile += 1;
-//        }
-//        return nonEmptyTile;
-//    }
+
     private int maxEast(TETile[][] world, Position start) {
         int nonEmptyTile = 1;
         for (int x = start.getX() + 2; x < world.length - 1; x += 1) {
@@ -363,7 +332,7 @@ public class MapGenerator {
         lastHallwayEndPosition = last;
 
         addWorldLoadFactor(world, 3, length + 2);
-        System.out.println("Drew a horizontal hallway with length " + length + " and bearing " + newBearing);
+        //System.out.println("Drew a horizontal hallway with length " + length + " and bearing " + newBearing);
     }
 
     /** Draw a Vertical hallway. The start position is not included in the hallway.
@@ -395,7 +364,7 @@ public class MapGenerator {
          lastHallwayEndPosition = last;
 
         addWorldLoadFactor(world, length + 2, 3);
-        System.out.println("Drew a vertical hallway with length " + length + " and bearing " + newBearing);
+        //System.out.println("Drew a vertical hallway with length " + length + " and bearing " + newBearing);
     }
 
     /** Returns the first position of the tile in the direction of the bearing
