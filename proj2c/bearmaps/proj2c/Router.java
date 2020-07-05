@@ -2,9 +2,12 @@ package bearmaps.proj2c;
 
 import bearmaps.hw4.AStarSolver;
 import bearmaps.hw4.WeirdSolver;
+import bearmaps.hw4.streetmap.Node;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +45,49 @@ public class Router {
      */
     public static List<NavigationDirection> routeDirections(AugmentedStreetMapGraph g, List<Long> route) {
         /* fill in for part IV */
+        // StreetMapGraph class has g.lat(), g.lon(), g.name() methods
+        // so no need to convert vertex to Node
+//        if (route == null) {
+//            return null;
+//        }
+//        Long firstV = route.get(0);
+//        Stack<NavigationDirection> directions = new Stack<>();
+//        NavigationDirection start = new NavigationDirection();
+//        start.way = g.name(firstV);
+//        start.distance = 0;
+//        start.direction = NavigationDirection.START;
+//        directions.push(start);
+//
+//        double totalDist = 0;
+//        double prevBearing = NavigationDirection.bearing(g.lon(firstV), g.lon(firstV),
+//                                g.lat(firstV), g.lat(firstV));
+//        double currBearing;
+//
+//        for (int i = 1; i < route.size(); i += 1) {
+//            String prevName = directions.peek().way;
+//            // if name of current vertex equals previous vertex
+//            if (g.name(route.get(i)).equals(prevName)) {
+//                totalDist += g.estimatedDistanceToGoal(route.get(i-1), route.get(i));
+//            } else {
+//                NavigationDirection d = new NavigationDirection();
+//                d.way = g.name(route.get(i));
+//                d.distance = totalDist;
+//                currBearing = NavigationDirection.bearing(g.lon(route.get(i-1)),
+//                        g.lon(route.get(i)), g.lat(route.get(i-1)), g.lat(route.get(i)));
+//                d.direction = NavigationDirection.getDirection(prevBearing, currBearing);
+//                directions.push(d);
+//                prevBearing = currBearing;
+//                totalDist = 0;
+//            }
+//        }
+//
+//        //need to convert stack into list (reverse the order before returning)
+//        LinkedList<NavigationDirection> listOfDirections = new LinkedList<>();
+//        while(!directions.isEmpty()) {
+//            listOfDirections.addFirst(directions.pop());
+//        }
+//
+//        return listOfDirections;
         return null;
     }
 
