@@ -1,0 +1,246 @@
+[33mcommit 1f3466d8a193f3d5a8d75bc8adb63e3121743161[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Gerry Bong <ggbong@Gerry-Samsung-Laptop.local>
+Date:   Sat Mar 30 19:37:51 2019 -0700
+
+    completed lab 1 and added hw 0
+
+[33mcommit f95c79a5f0a7561f7bf452b8383cabd1c50cf148[m
+Author: Gerry Bong <ggbong@Gerry-Samsung-Laptop.local>
+Date:   Sat Mar 30 18:37:40 2019 -0700
+
+    completed first part of lab 1
+
+[33mcommit 6978a9f92c9bba949a357cfcf1ec7cdb073494a3[m[33m ([m[1;31mskeleton/master[m[33m)[m
+Author: hug <hug@cs.berkeley.edu>
+Date:   Fri Mar 29 22:58:04 2019 -0700
+
+    fixed BasicPuzzle4
+
+[33mcommit 451ddde6050159ab3f1770748e22a0875996046f[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Thu Mar 28 22:32:15 2019 -0700
+
+    added hw4 skeleton code (beta)
+
+[33mcommit 6e94997378eedb3be2a1570b2736651f808d5bed[m
+Author: mhwangc <mhwangc@berkeley.edu>
+Date:   Tue Mar 19 12:02:13 2019 -0700
+
+    upload clab9 inputs
+
+[33mcommit 8b0cc51840aa95bd590666430856eab8d16b1207[m
+Author: mhwangc <mhwangc@berkeley.edu>
+Date:   Tue Mar 19 10:13:29 2019 -0700
+
+    release clab9
+
+[33mcommit ca24f8dd778b94bdc52d908c910081c7ccd96447[m
+Author: Jenny Huang <jph17@berkeley.edu>
+Date:   Sun Mar 17 11:46:51 2019 -0700
+
+    release lab9
+
+[33mcommit f6ac002c3d915b067db1761ce0317473193544ab[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Thu Mar 14 09:51:52 2019 -0700
+
+    put TimingTestDemo in the right folder
+
+[33mcommit e13273d27fdf4bc43fe4486c6139fada5b075c68[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Wed Mar 13 23:01:38 2019 -0700
+
+    added example of how you can test the runtime of code
+
+[33mcommit e82b5584eb7b0fd3164ea0749d1cb55c156d0ec8[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Wed Mar 13 22:32:15 2019 -0700
+
+    added note that add method can assume that items are never null
+
+[33mcommit 241febd1a49bf7d4b26ab283d104b167c5ee9be4[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Wed Mar 13 22:24:27 2019 -0700
+
+    added a class along with a couple of methods that demonstrate printing of a heap
+
+[33mcommit 56548d42f8677a92630c71e826a5d43712cb2c3d[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Wed Mar 13 22:00:03 2019 -0700
+
+    updated Naive MinPQ so that it does not throw an exception on add, since this makes Naive MinPQ too slow to use in testing
+
+[33mcommit 3cc4f93a1b63af37f0f132c54428dea4f900b17f[m
+Author: Josh Hug <josh@joshh.ug>
+Date:   Wed Mar 13 21:27:01 2019 -0700
+
+    updated Naive MinPQ to throw the correct exceptions
+
+[33mcommit 2b4bd032116e01b0c153a6601d2eacfd62d2f576[m
+Author: Matt Owen <omatthew98@berkeley.edu>
+Date:   Mon Mar 11 22:57:06 2019 -0700
+
+    releasing proj2ab
+
+[33mcommit e57ce8a441526b8bcae389a3d0a01e67481cf854[m
+Author: Matthew Sit <msit@berkeley.edu>
+Date:   Mon Mar 11 00:15:44 2019 -0700
+
+    Release lab8 and clab8
+
+[33mcommit 77f2440f15e875f34a10e84073f17a8b5adc2a7f[m
+Author: Christine Zhou <cazhou@berkeley.edu>
+Date:   Thu Mar 7 09:26:58 2019 -0800
+
+    Release hw3.
+
+[33mcommit 11e7e799fa52d7839fbf15b4531c4cd6edd50e82[m
+Author: Matthew Sit <msit@berkeley.edu>
+Date:   Wed Mar 6 15:25:35 2019 -0800
+
+    Release lab7 and clab7
+
+[33mcommit c0b86bdd5bc8f09d320d443dbe456a28c1f21175[m
+Author: Christine Zhou <cazhou@berkeley.edu>
+Date:   Fri Mar 1 16:09:38 2019 -0800
+
+    Release hw2.
+
+[33mcommit 9b66edfcd9723d9623bf9bf9f39db10064548e53[m
+Author: Matt Owen <omatthew98@berkeley.edu>
+Date:   Tue Feb 26 22:21:11 2019 -0800
+
+    updating to fix style
+
+[33mcommit 08137c1b575263bb21d491cefa1f52fa9e057516[m
+Author: Matt Owen <omatthew98@berkeley.edu>
+Date:   Tue Feb 26 18:42:06 2019 -0800
+
+    adding lab6
+
+[33mcommit 79d0d3564fc0acb5acf49d05d3becc691e3b1b1a[m
+Author: Christine Zhou <cazhou@berkeley.edu>
+Date:   Fri Feb 22 16:03:29 2019 -0800
+
+    hw1: Update comment in GuitarString.
+
+[33mcommit 5eaa98b7af3ecfc871ddbb60a14f4132a4b196fa[m
+Author: Christine Zhou <cazhou@berkeley.edu>
+Date:   Fri Feb 22 12:46:25 2019 -0800
+
+    hw1: Release hw1.
+
+[33mcommit a4f50ba6a08d22e962fd2cd595834fa742c2d45d[m
+Author: Matthew Sit <msit@berkeley.edu>
+Date:   Wed Feb 20 16:27:29 2019 -0800
+
+    Add .world files to lab 5
+
+[33mcommit 4296aa56b32aa2ac77b18762d16159d393a11e50[m
+Author: Matthew Sit <msit@berkeley.edu>
+Date:   Wed Feb 20 12:01:30 2019 -0800
+
+    Hot fix to HugLife.java
+
+[33mcommit 985b852195ec326ea1841f15c5d9c779d3f5d76f[m
+Author: Matthew Sit <msit@berkeley.edu>
+Date:   Wed Feb 20 11:46:22 2019 -0800
+
+    Release lab 5
+
+[33mcommit 684d412e1952b1a65739fbfc62871cae7d075127[m
+Merge: eb525bc 4295155
+Author: Jenny Huang <jph17@berkeley.edu>
+Date:   Tue Feb 12 23:53:19 2019 -0800
+
+    Merge branch 'master' of https://github.com/Berkeley-CS61B/skeleton-sp19
+
+[33mcommit eb525bc63201d165e412b8ae2c436c90ae95d5ee[m
+Author: Jenny Huang <jph17@berkeley.edu>
+Date:   Tue Feb 12 23:52:41 2019 -0800
+
+    add lab4
+
+[33mcommit 4295155a9638b20072417467cfda54aab5cf0d80[m
+Author: Eli Lipsitz <eli.lipsitz@gmail.com>
+Date:   Tue Feb 12 13:57:12 2019 -0800
+
+    library-sp19: update to latest commit
+
+[33mcommit c4dd2becf78f8dae39f1bd33030d805ac08be62d[m
+Author: Albert Hu <al.hu@berkeley.edu>
+Date:   Sat Feb 9 15:26:29 2019 -0800
+
+    release proj1b and proj1gold
+
+[33mcommit fee542e82be9387ce44799941a31225a0fc0285d[m
+Author: Albert Hu <al.hu@berkeley.edu>
+Date:   Wed Feb 6 16:28:46 2019 -0800
+
+    change .of to .list
+
+[33mcommit 307a960179e376aa0c9929fb87e1835a814452e8[m
+Author: Albert Hu <al.hu@berkeley.edu>
+Date:   Wed Feb 6 15:00:46 2019 -0800
+
+    update Intlist.of to Intlist.list
+
+[33mcommit 7c55e55dfcf79373f791a12189357748c7f068ad[m
+Author: Albert Hu <al.hu@berkeley.edu>
+Date:   Wed Feb 6 14:21:52 2019 -0800
+
+    release lab3
+
+[33mcommit 6231d277de742e2264a9649a2a93500c6b3923ec[m
+Author: Albert Hu <al.hu@berkeley.edu>
+Date:   Sat Feb 2 12:09:48 2019 -0800
+
+    release proj1a
+
+[33mcommit 035cf5c1c41dbf68c54182f7a4d7f021d1d7c87b[m
+Author: Gigi Lu <gigi.lu@berkeley.edu>
+Date:   Thu Jan 24 23:33:30 2019 -0800
+
+    Project 0: Update tests to fail on infinite inputs
+
+[33mcommit 2b456755d1192fc45ff766212eaaa57567303c4a[m
+Author: Gigi Lu <gigi.lu@berkeley.edu>
+Date:   Wed Jan 23 14:58:49 2019 -0800
+
+    proj0: missing image
+
+[33mcommit fc9ab819476dc063a680ddbc88abb95a2ad52598[m
+Author: Gigi Lu <gigi.lu@berkeley.edu>
+Date:   Wed Jan 23 14:40:43 2019 -0800
+
+    proj0: added images and audio
+
+[33mcommit 3b03bc1fb002aa419029a590393909ae409da58b[m
+Author: Gigi Lu <gigi.lu@berkeley.edu>
+Date:   Wed Jan 23 00:57:12 2019 -0800
+
+    Add proj0
+
+[33mcommit bf4d84b76676f1f8fc515ac1a8b9c9bb7d0a8650[m
+Author: Eli Lipsitz <eli.lipsitz@gmail.com>
+Date:   Tue Jan 22 21:25:43 2019 -0800
+
+    lab2: add missing foods.csv
+
+[33mcommit 84bf39bfd1c9cfeaa5d0fed357f637ee54450ae7[m
+Author: Eli Lipsitz <eli.lipsitz@gmail.com>
+Date:   Sat Jan 12 23:18:03 2019 -0600
+
+    Add lab2
+
+[33mcommit 66565d63b45ee805ce6190896bb74082e7649827[m
+Author: Eli Lipsitz <eli.lipsitz@gmail.com>
+Date:   Sat Jan 12 20:06:03 2019 -0600
+
+    Add lab2setup
+
+[33mcommit a91aa4b40162bbcb874b5f1d15550da4d685ca18[m
+Author: Eli Lipsitz <eli.lipsitz@gmail.com>
+Date:   Fri Jan 11 17:08:40 2019 -0600
+
+    Initial commit of skeleton sp19
