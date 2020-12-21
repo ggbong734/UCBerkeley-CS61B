@@ -10,7 +10,7 @@ Much of 61B is concerned with the tradeoffs in time and memory for a variety of 
 * Project 0 (NBody): Introduction to Java
 * Project 1 (Deques): Basic Design, Testing, and Code Review
 * Project 2 (BearMaps): Testing and Large Scale Implementation
-* Project 3 (Build Your Own World): Large Scale Design
+* [Project 3 (Build Your Own World): Large Scale Design](https://github.com/ggbong734/cs61b/tree/master/proj3)
 
 Technologies used: Java, IntelliJ IDE, Git 
 
